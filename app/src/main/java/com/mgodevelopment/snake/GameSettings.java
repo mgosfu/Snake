@@ -20,6 +20,7 @@ public final class GameSettings {
     public static final int ANIMATION_HIDE_HOME_BUTTON_DURATION = 500;
     public static final int ANIMATION_SHOW_TITLE_DURATION = 400;
     public static final int ANIMATION_HIDE_TITLE_DURATION = 400;
+    public static final int START_NEW_ACTIVITY_DURATION = 200;
 
     public static final int SHAKE_DURATION = 500;
     public static final int GAME_THREAD = 80;

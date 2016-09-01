@@ -6,16 +6,24 @@ android {
 
     defaultConfig {
         applicationId "com.mgodevelopment.snake"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    dexOptions {
+        incremental true
+        preDexLibraries true
+        maxProcessCount 2
+        javaMaxHeapSize "2g"
     }
 }
 
@@ -24,6 +32,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.2.0'
     compile 'com.android.support:design:24.2.0'
-    compile 'com.google.android:support-v4:r7'
+    //compile 'com.google.android:support-v4:r7'
     compile 'com.google.android.gms:play-services:9.4.0'
+    compile 'com.android.support:multidex:1.0.1'
 }

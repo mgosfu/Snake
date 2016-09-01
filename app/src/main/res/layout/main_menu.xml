@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/no_walls"
-        android:layout_above="@+id/gamecenter"
+        android:layout_above="@+id/bomb"
         android:layout_alignLeft="@id/snake_middle"
         android:layout_marginLeft="46dp"
         android:src="@mipmap/menu_options"/>
@@ -65,13 +65,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/settings"
         android:layout_below="@+id/classic"
-        android:layout_toLeftOf="@id/gamecenter"
+
+        android:layout_toLeftOf="@id/bomb"
         android:src="@mipmap/menu_options"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gamecenter"
+        android:id="@+id/bomb"
         android:layout_alignRight="@+id/no_walls"
         android:layout_alignTop="@+id/settings"
         android:src="@mipmap/menu_options"/>
