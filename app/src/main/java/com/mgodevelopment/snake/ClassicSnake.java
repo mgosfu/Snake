@@ -320,7 +320,8 @@ public class ClassicSnake extends AppCompatActivity {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("Score", playerScore);
-        editor.commit();
+        //editor.commit();
+        editor.apply();
         Intent intentScore = new Intent(ClassicSnake.this, ClassicScore.class);
         intentScore.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(intentScore);

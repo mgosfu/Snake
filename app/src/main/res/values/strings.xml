@@ -13,5 +13,6 @@
     <string name="title_activity_bomb_snake">Bomb Snake</string>
     <string name="title_activity_bomb_score">Bomb Score</string>
     <string name="title_activity_classic_snake">Classic Snake</string>
+    <string name="game_over">GAME OVER</string>
 
 </resources>
