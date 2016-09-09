@@ -3,8 +3,10 @@ package com.mgodevelopment.snake;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -13,7 +15,12 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class ClassicSnake extends AppCompatActivity {
 
@@ -44,6 +51,21 @@ public class ClassicSnake extends AppCompatActivity {
 
     private boolean gameOver;
 
+    private ArrayList<ImageView> parts;
+    private int screenHeight, screenWidth;
+
+    private ArrayList<ImageView> points;
+    private boolean isCollide = false;
+
+    private Handler myHandler;
+
+    private ImageView head;
+
+    private TextView textScore;
+
+    private int speedX = 17;
+    private int speedY = 17;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -64,6 +86,7 @@ public class ClassicSnake extends AppCompatActivity {
         classicSnakeLayout = (RelativeLayout) findViewById(R.id.classic_snake_layout);
         classicSnakeLayout.setBackgroundResource(R.mipmap.background_for_snake);
         classicSnakeLayout.setPaddingRelative(GameSettings.LAYOUT_PADDDING, GameSettings.LAYOUT_PADDDING, GameSettings.LAYOUT_PADDDING, GameSettings.LAYOUT_PADDDING);
+        textScore = (TextView) findViewById(R.id.score);
 
         isInitialized = false;
 
@@ -302,4 +325,244 @@ public class ClassicSnake extends AppCompatActivity {
 
     }
 
+    private void checkBitten() {
+
+        ImageView snakeHead = parts.get(0);
+        ImageView snakeTile = new ImageView(this);
+
+        for (int i = 1; i < parts.size(); i++) {
+            snakeTile = parts.get(i);
+            if (snakeHead.getX() == snakeTile.getX() && snakeHead.getY() == snakeTile.getY()) {
+                collide();
+                break;
+            }
+        }
+
+    }
+
+    private void addTail() {
+
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.mipmap.head);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(((screenWidth * 20) / 450), ((screenHeight * 30) / 450));
+        imageView.setLayoutParams(layoutParams);
+        classicSnakeLayout.addView(imageView);
+        parts.add(imageView);
+
+    }
+
+    private void setNewPoint() {
+
+        Random random = new Random();
+        ImageView newPoint = new ImageView(ClassicSnake.this);
+        float x = random.nextFloat() * (screenWidth - newPoint.getWidth());
+        float y = random.nextFloat() * (screenHeight - newPoint.getHeight());
+        newPoint.setImageResource(R.mipmap.food);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(((screenWidth * 20) / 450), ((screenHeight * 30) / 450));
+        newPoint.setLayoutParams(layoutParams);
+        newPoint.setX(x);
+        newPoint.setY(y);
+        isCollide = false;
+        classicSnakeLayout.addView(newPoint);
+        points.add(points.size(), newPoint);
+
+    }
+
+    private void setFoodPoints() {
+
+        for (int i = 0; i < GameSettings.FOOD_POINTS; i++) {
+
+            Random random = new Random();
+            ImageView foodItem = new ImageView(this);
+            float x = random.nextFloat() * (screenWidth - foodItem.getWidth());
+            float y = random.nextFloat() * (screenHeight - foodItem.getHeight());
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(((screenWidth * 20) / 450), ((screenHeight * 30) / 450));
+            foodItem.setImageResource(R.mipmap.food);
+            foodItem.setLayoutParams(layoutParams);
+            foodItem.setX(x);
+            foodItem.setY(y);
+            classicSnakeLayout.addView(foodItem);
+            points.add(i, foodItem);
+
+        }
+
+    }
+
+    private void update() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!gameOver && !isPaused) {
+                    try {
+                        Thread.sleep(GameSettings.GAME_THREAD);
+                        myHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                float left = head.getX() - head.getWidth();
+                                float top = head.getY() - head.getHeight();
+                                float right = head.getX() + head.getWidth();
+                                float bottom = head.getY() + head.getHeight();
+
+                                for (int i = 0; i < points.size(); i++) {
+                                    if (!isCollide) {
+                                        ImageView p = points.get(i);
+                                        float left1 = p.getX() - p.getWidth();
+                                        float top1 = p.getY() - p.getHeight();
+                                        float right1 = p.getX() + p.getWidth();
+                                        float bottom1 = p.getY() + p.getHeight();
+
+                                        // player
+                                        Rect rc1 = new Rect();
+                                        rc1.set((int) left, (int) top, (int) right, (int) bottom);
+                                        // food item
+                                        Rect rc2 = new Rect();
+                                        rc2.set((int) left1, (int) top1, (int) right1, (int) bottom1);
+
+                                        p.getHitRect(rc2);
+
+                                        if (Rect.intersects(rc1, rc2)) {
+
+                                            classicSnakeLayout.removeView(p);
+                                            points.remove(i);
+                                            playerScore++;
+                                            isCollide = true;
+                                            textScore.setText("Score: " + playerScore);
+                                            setNewPoint();
+                                            addTail();
+                                            shake();
+                                            fadeAnim();
+
+                                        }
+
+                                        checkBitten();
+                                    }
+                                }
+
+                                isCollide = false;
+
+                                if (isGoingRight || clickRight) {
+                                    for (int i = parts.size() - 1; i >= 0; i--) {
+                                        ImageView imageView = parts.get(i);
+                                        if (i > 0) {
+
+                                            ImageView imageView2 = parts.get(i - 1);
+                                            imageView.setX(imageView2.getX());
+                                            imageView.setY(imageView2.getY());
+
+                                        } else {
+                                            imageView.setX(imageView.getX() + speedX);
+                                            if (imageView.getX() + imageView.getWidth() >= screenWidth) {
+
+                                                imageView.setX(screenWidth - (imageView.getWidth() / 2));
+                                                collide();
+
+                                            }
+                                        }
+                                    }
+                                } else if (isGoingLeft || clickLeft) {
+                                    for (int i = parts.size() - 1; i >= 0; i--) {
+                                        ImageView imageView = parts.get(i);
+                                        if (i > 0) {
+
+                                            ImageView imageView2 = parts.get(i - 1);
+                                            imageView.setX(imageView2.getX());
+                                            imageView.setY(imageView2.getY());
+
+                                        } else {
+                                            imageView.setX(imageView.getX() - speedX);
+                                            if (imageView.getX() <= 0) {
+
+                                                imageView.setX(0);
+                                                collide();
+
+                                            }
+                                        }
+                                    }
+                                } else if (isGoingUp || clickUp) {
+                                    for (int i = parts.size() - 1; i >= 0; i--) {
+                                        ImageView imageView = parts.get(i);
+                                        if (i > 0) {
+
+                                            ImageView imageView2 = parts.get(i - 1);
+                                            imageView.setX(imageView2.getX());
+                                            imageView.setY(imageView2.getY());
+
+                                        } else {
+                                            imageView.setY(imageView.getY() - speedX);
+                                            if (imageView.getY() <= 0) {
+
+                                                imageView.setY(0);
+                                                collide();
+
+                                            }
+                                        }
+                                    }
+                                } else if (isGoingDown || clickDown) {
+                                    for (int i = parts.size() - 1; i >= 0; i--) {
+                                        ImageView imageView = parts.get(i);
+                                        if (i > 0) {
+
+                                            ImageView imageView2 = parts.get(i - 1);
+                                            imageView.setX(imageView2.getX());
+                                            imageView.setY(imageView2.getY());
+
+                                        } else {
+                                            imageView.setY(imageView.getY() + speedX);
+                                            if (imageView.getY() + imageView.getHeight() >= screenHeight) {
+
+                                                imageView.setY(screenHeight - (imageView.getHeight() / 2));
+                                                collide();
+
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                }
+            }
+        }).start();
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

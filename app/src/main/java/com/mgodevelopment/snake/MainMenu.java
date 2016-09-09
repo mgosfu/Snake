@@ -48,6 +48,12 @@ public class MainMenu extends AppCompatActivity {
 
         adView.loadAd(adRequest);
 
+        initClassic();
+        initBomb();
+        initNoWalls();
+        initSettings();
+        initTitle();
+
     }
 
     private void initClassic() {
@@ -265,7 +271,7 @@ public class MainMenu extends AppCompatActivity {
 
                 btnSettings.setImageResource(R.mipmap.settings);
 
-                btnClassic.setOnClickListener(new View.OnClickListener() {
+                btnSettings.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
 
@@ -292,10 +298,10 @@ public class MainMenu extends AppCompatActivity {
                         Animation animTitleLeft = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_title_left);
                         animTitleLeft.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
 
-                        Animation animTitleMiddle = AnimationUtils.loadAnimation(MainMenu.this, R.anim.back_anim_for_title_middle);
+                        Animation animTitleMiddle = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_title_middle);
                         animTitleMiddle.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
 
-                        Animation animTitleRight = AnimationUtils.loadAnimation(MainMenu.this, R.anim.back_anim_for_title_right);
+                        Animation animTitleRight = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_title_right);
                         animTitleRight.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
 
                         btnClassic.startAnimation(animClassic);
@@ -319,8 +325,6 @@ public class MainMenu extends AppCompatActivity {
                     }
                 });
 
-                btnSettings.setAnimation(compileAnim);
-
             }
 
             @Override
@@ -328,6 +332,8 @@ public class MainMenu extends AppCompatActivity {
 
             }
         });
+
+        btnSettings.setAnimation(compileAnim);
 
     }
 
