@@ -442,6 +442,7 @@ public class ClassicSnake extends AppCompatActivity {
                                 isCollide = false;
 
                                 if (isGoingRight || clickRight) {
+
                                     for (int i = parts.size() - 1; i >= 0; i--) {
                                         ImageView imageView = parts.get(i);
                                         if (i > 0) {
@@ -460,7 +461,9 @@ public class ClassicSnake extends AppCompatActivity {
                                             }
                                         }
                                     }
+
                                 } else if (isGoingLeft || clickLeft) {
+
                                     for (int i = parts.size() - 1; i >= 0; i--) {
                                         ImageView imageView = parts.get(i);
                                         if (i > 0) {
@@ -479,7 +482,9 @@ public class ClassicSnake extends AppCompatActivity {
                                             }
                                         }
                                     }
+
                                 } else if (isGoingUp || clickUp) {
+
                                     for (int i = parts.size() - 1; i >= 0; i--) {
                                         ImageView imageView = parts.get(i);
                                         if (i > 0) {
@@ -498,7 +503,9 @@ public class ClassicSnake extends AppCompatActivity {
                                             }
                                         }
                                     }
+
                                 } else if (isGoingDown || clickDown) {
+
                                     for (int i = parts.size() - 1; i >= 0; i--) {
                                         ImageView imageView = parts.get(i);
                                         if (i > 0) {
@@ -517,6 +524,7 @@ public class ClassicSnake extends AppCompatActivity {
                                             }
                                         }
                                     }
+
                                 }
 
                             }
@@ -528,6 +536,61 @@ public class ClassicSnake extends AppCompatActivity {
             }
         }).start();
 
+    }
+
+    public class SwipeGestureDirector extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+            boolean result = false;
+
+            if (!useButtons) {
+
+                try {
+
+                    float diffX = e2.getX() - e1.getX();
+                    float diffY = e2.getY() - e1.getY();
+
+                    if (Math.abs(diffX) > Math.abs(diffY)) {
+
+                        // horizontal swipe
+                        if (Math.abs(diffX) > GameSettings.SWIPE_THRESH_HOLD && Math.abs(velocityX) > GameSettings.SWIPE_VELUCITY_THRESH_HOLD) {
+                            if (diffX > 0) {
+                                onSwipeRight();
+                            } else {
+                                onSwipeLeft();
+                            }
+                        }
+                        result = true;
+
+                    } else if (Math.abs(diffY) > GameSettings.SWIPE_THRESH_HOLD && Math.abs(velocityY) > GameSettings.SWIPE_VELUCITY_THRESH_HOLD) {
+
+                        // vertical swipe
+                        if (diffY > 0) {
+                            onSwipeDown();
+                        } else {
+                            onSwipeUp();
+                        }
+                        result = true;
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                return result;
+
+            }
+
+            return result;
+
+        }
     }
 
 }
