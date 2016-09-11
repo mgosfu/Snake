@@ -497,7 +497,7 @@ public class ClassicSnake extends AppCompatActivity {
                                             imageView.setY(imageView2.getY());
 
                                         } else {
-                                            imageView.setY(imageView.getY() - speedX);
+                                            imageView.setY(imageView.getY() - speedY);
                                             if (imageView.getY() <= 0) {
 
                                                 imageView.setY(0);
@@ -518,7 +518,7 @@ public class ClassicSnake extends AppCompatActivity {
                                             imageView.setY(imageView2.getY());
 
                                         } else {
-                                            imageView.setY(imageView.getY() + speedX);
+                                            imageView.setY(imageView.getY() + speedY);
                                             if (imageView.getY() + imageView.getHeight() >= screenHeight) {
 
                                                 imageView.setY(screenHeight - (imageView.getHeight() / 2));
