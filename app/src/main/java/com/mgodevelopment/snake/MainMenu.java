@@ -59,7 +59,7 @@ public class MainMenu extends AppCompatActivity {
     private void initClassic() {
 
         btnClassic = (ImageView) findViewById(R.id.classic);
-        compileAnim = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_classic_button);
+        compileAnim = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_button_top_left);
         compileAnim.setDuration(GameSettings.ANIMATION_OPEN_BUTTON_DURATION);
 
         compileAnim.setAnimationListener(new Animation.AnimationListener() {
@@ -100,7 +100,7 @@ public class MainMenu extends AppCompatActivity {
     private void initNoWalls() {
 
         btnNoWalls = (ImageView) findViewById(R.id.no_walls);
-        compileAnim = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_no_walls_button);
+        compileAnim = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_button_top_right);
         compileAnim.setDuration(GameSettings.ANIMATION_OPEN_BUTTON_DURATION);
 
         compileAnim.setAnimationListener(new Animation.AnimationListener() {
@@ -141,7 +141,7 @@ public class MainMenu extends AppCompatActivity {
     private void initBomb() {
 
         btnBomb = (ImageView) findViewById(R.id.bomb);
-        compileAnim = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_bomb_button);
+        compileAnim = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_button_bottom_right);
         compileAnim.setDuration(GameSettings.ANIMATION_OPEN_BUTTON_DURATION);
 
         compileAnim.setAnimationListener(new Animation.AnimationListener() {
@@ -258,7 +258,7 @@ public class MainMenu extends AppCompatActivity {
     private void initSettings() {
 
         btnSettings = (ImageView) findViewById(R.id.settings);
-        compileAnim = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_settings_button);
+        compileAnim = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_button_bottom_left);
         compileAnim.setDuration(GameSettings.ANIMATION_OPEN_BUTTON_DURATION);
         compileAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -283,16 +283,16 @@ public class MainMenu extends AppCompatActivity {
                         btnBomb.setImageResource(R.mipmap.menu_options);
                         btnNoWalls.setImageResource(R.mipmap.menu_options);
 
-                        Animation animClassic = AnimationUtils.loadAnimation(MainMenu.this, R.anim.reverse_for_classic_button);
+                        Animation animClassic = AnimationUtils.loadAnimation(MainMenu.this, R.anim.reverse_for_button_top_left);
                         animClassic.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
 
-                        Animation animNoWalls = AnimationUtils.loadAnimation(MainMenu.this, R.anim.reverse_for_no_walls_button);
+                        Animation animNoWalls = AnimationUtils.loadAnimation(MainMenu.this, R.anim.reverse_for_button_top_right);
                         animNoWalls.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
 
-                        Animation animBomb = AnimationUtils.loadAnimation(MainMenu.this, R.anim.reverse_for_bomb_button);
+                        Animation animBomb = AnimationUtils.loadAnimation(MainMenu.this, R.anim.reverse_for_button_bottom_right);
                         animBomb.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
 
-                        Animation animSettings = AnimationUtils.loadAnimation(MainMenu.this, R.anim.reverse_for_settings_button);
+                        Animation animSettings = AnimationUtils.loadAnimation(MainMenu.this, R.anim.reverse_for_button_bottom_left);
                         animSettings.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
 
                         Animation animTitleLeft = AnimationUtils.loadAnimation(MainMenu.this, R.anim.anim_for_title_left);
