@@ -15,4 +15,8 @@
     <string name="title_activity_classic_snake">Classic Snake</string>
     <string name="game_over">GAME OVER</string>
 
+    <string name="current_score">Score: %1%d</string>
+    <string name="high_score">High: %1$d</string>
+
 </resources>
+

@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 public class ClassicScore extends AppCompatActivity {
 
-    private SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
     private Animation animation;
 
     private TextView scoreTextView;
@@ -26,18 +25,23 @@ public class ClassicScore extends AppCompatActivity {
     private ImageView playAgainImageView;
     private ImageView mainMenuImageView;
 
+    private TextView gameOverTitleLeftTextView;
+    private TextView gameOverTitleMiddleTextView;
+    private TextView gameOverTitleRightTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classic_score);
 
-    }
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().hide();
+        initPage();
 
-    private void initPage() {
-        initScore();
-        initHighScore();
-        initPlayAgain();
     }
 
     private void initScore() {
@@ -172,10 +176,6 @@ public class ClassicScore extends AppCompatActivity {
                         Animation animationTitleRight = AnimationUtils.loadAnimation(ClassicScore.this, R.anim.anim_for_title_right);
                         animationTitleRight.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
 
-                        TextView gameOverTitleLeftTextView = (TextView) findViewById(R.id.gameover_left);
-                        TextView gameOverTitleMiddleTextView = (TextView) findViewById(R.id.gameover_middle);
-                        TextView gameOverTitleRightTextView = (TextView) findViewById(R.id.gameover_right);
-
                         scoreTextView.startAnimation(animationScore);
                         highScoreTextView.startAnimation(animationHighScore);
                         playAgainImageView.startAnimation(animationPlayAgain);
@@ -200,8 +200,6 @@ public class ClassicScore extends AppCompatActivity {
                     }
                 });
 
-                mainMenuImageView.startAnimation(animation);
-
             }
 
             @Override
@@ -215,9 +213,10 @@ public class ClassicScore extends AppCompatActivity {
 
     private void setScore() {
 
-        //SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         int playerScore = preferences.getInt("Score", 0);
         scoreTextView.setText("Score: " + String.valueOf(playerScore));
+        //scoreTextView.setText(getString(R.string.current_score, playerScore, 0));
         scoreTextView.setTextColor(Color.WHITE);
         scoreTextView.setGravity(Gravity.CENTER);
         scoreTextView.setBackgroundResource(R.mipmap.menu_options);
@@ -226,7 +225,7 @@ public class ClassicScore extends AppCompatActivity {
 
     private void setHighScore() {
 
-        //SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         int highScore = preferences.getInt("HighScoreClassic", 0);
         int lastScore = preferences.getInt("Score", 0);
@@ -239,11 +238,89 @@ public class ClassicScore extends AppCompatActivity {
 
         }
 
-        highScoreTextView.setText(String.valueOf(highScore));
+        highScoreTextView.setText("High: " + String.valueOf(highScore));
+        //highScoreTextView.setText(getString(R.string.high_score, highScore, 0));
         highScoreTextView.setTextColor(Color.WHITE);
         highScoreTextView.setGravity(Gravity.CENTER);
         highScoreTextView.setBackgroundResource(R.mipmap.menu_options);
 
+    }
+
+    private void initTitle() {
+
+        gameOverTitleLeftTextView = (TextView) findViewById(R.id.gameover_left);
+        gameOverTitleMiddleTextView = (TextView) findViewById(R.id.gameover_middle);
+        gameOverTitleRightTextView = (TextView) findViewById(R.id.gameover_right);
+
+        Animation animationTitleLeft = AnimationUtils.loadAnimation(ClassicScore.this, R.anim.back_anim_for_title_left);
+        animationTitleLeft.setDuration(GameSettings.ANIMATION_HIDE_TITLE_DURATION);
+        animationTitleLeft.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        gameOverTitleLeftTextView.startAnimation(animationTitleLeft);
+
+        Animation animationTitleMiddle = AnimationUtils.loadAnimation(ClassicScore.this, R.anim.back_anim_for_title_middle);
+        animationTitleMiddle.setDuration(GameSettings.ANIMATION_HIDE_TITLE_DURATION);
+        animationTitleMiddle.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        gameOverTitleMiddleTextView.startAnimation(animationTitleMiddle);
+
+        Animation animationTitleRight = AnimationUtils.loadAnimation(ClassicScore.this, R.anim.back_anim_for_title_right);
+        animationTitleRight.setDuration(GameSettings.ANIMATION_HIDE_TITLE_DURATION);
+        animationTitleRight.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        gameOverTitleRightTextView.startAnimation(animationTitleRight);
+
+    }
+
+    private void initPage() {
+
+        initTitle();
+        initScore();
+        initHighScore();
+        initPlayAgain();
+        initMainMenu();
     }
 
 }

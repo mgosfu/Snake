@@ -99,10 +99,19 @@ public class ClassicSnake extends AppCompatActivity {
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         playMusic = preferences.getBoolean("PlayMusic", true);
         musicPlayer = MediaPlayer.create(ClassicSnake.this, R.raw.music);
+
         if (playMusic) {
 
-            musicPlayer.setLooping(true);
             musicPlayer.start();
+            //This did the trick
+            musicPlayer.setOnErrorListener(new android.media.MediaPlayer.OnErrorListener() {
+
+                public boolean onError(MediaPlayer mediaplayer, int i, int j)
+                {
+                    return false;
+                }
+            });
+            musicPlayer.setLooping(true);
 
         } else {
             musicPlayer.stop();
