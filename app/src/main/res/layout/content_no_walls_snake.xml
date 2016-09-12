@@ -2,14 +2,56 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/no_walls_layout"
+    android:id="@+id/no_walls_snake_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.mgodevelopment.snake.NoWallsSnake"
+    tools:context="com.mgodevelopment.snake.ClassicSnake"
     tools:showIn="@layout/activity_no_walls_snake">
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="28dp" />
+
+    <ImageView
+        android:id="@+id/btn_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_left"
+        android:layout_toEndOf="@+id/btn_left"
+        android:src="@mipmap/up" />
+
+    <ImageView
+        android:id="@+id/btn_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/score"
+        android:layout_toStartOf="@+id/btn_right"
+        android:layout_marginBottom="10dp"
+        android:src="@mipmap/down" />
+
+    <ImageView
+        android:id="@+id/btn_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_down"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="17dp"
+        android:src="@mipmap/left" />
+
+    <ImageView
+        android:id="@+id/btn_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_down"
+        android:layout_toEndOf="@+id/btn_up"
+        android:src="@mipmap/right" />
 
 </RelativeLayout>

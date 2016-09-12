@@ -572,7 +572,7 @@ public class ClassicSnake extends AppCompatActivity {
                     if (Math.abs(diffX) > Math.abs(diffY)) {
 
                         // horizontal swipe
-                        if (Math.abs(diffX) > GameSettings.SWIPE_THRESH_HOLD && Math.abs(velocityX) > GameSettings.SWIPE_VELUCITY_THRESH_HOLD) {
+                        if (Math.abs(diffX) > GameSettings.SWIPE_THRESH_HOLD && Math.abs(velocityX) > GameSettings.SWIPE_VELOCITY_THRESH_HOLD) {
                             if (diffX > 0) {
                                 onSwipeRight();
                             } else {
@@ -581,7 +581,7 @@ public class ClassicSnake extends AppCompatActivity {
                         }
                         result = true;
 
-                    } else if (Math.abs(diffY) > GameSettings.SWIPE_THRESH_HOLD && Math.abs(velocityY) > GameSettings.SWIPE_VELUCITY_THRESH_HOLD) {
+                    } else if (Math.abs(diffY) > GameSettings.SWIPE_THRESH_HOLD && Math.abs(velocityY) > GameSettings.SWIPE_VELOCITY_THRESH_HOLD) {
 
                         // vertical swipe
                         if (diffY > 0) {
