@@ -17,8 +17,6 @@
 
     <string name="current_score">Score: %1$d</string>
     <string name="high_score">High: %1$d</string>
-    <string name="current_no_walls_score">Score: %1$d</string>
-    <string name="high_no_walls_score">High: %1$d</string>
 
 </resources>
 

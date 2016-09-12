@@ -48,9 +48,9 @@
         android:id="@+id/player_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/play_again"
         android:layout_alignTop="@+id/mode_high_score"
         android:layout_marginEnd="20dp"
-        android:layout_alignStart="@+id/play_again"
         android:background="@mipmap/menu_options"/>
 
     <TextView

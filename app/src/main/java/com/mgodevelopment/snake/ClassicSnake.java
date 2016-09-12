@@ -51,7 +51,7 @@ public class ClassicSnake extends AppCompatActivity {
 
     private int playerScore = 0;
 
-    private boolean gameOver;
+    private boolean isGameOver;
 
     private ArrayList<ImageView> parts;
     private int screenHeight, screenWidth;
@@ -325,7 +325,7 @@ public class ClassicSnake extends AppCompatActivity {
 
     private void collide() {
 
-        gameOver = true;
+        isGameOver = true;
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("Score", playerScore);
@@ -405,7 +405,7 @@ public class ClassicSnake extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!gameOver && !isPaused) {
+                while (!isGameOver && !isPaused) {
                     try {
                         Thread.sleep(GameSettings.GAME_THREAD);
                         myHandler.post(new Runnable() {

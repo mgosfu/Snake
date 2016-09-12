@@ -51,7 +51,7 @@ public class NoWallsSnake extends AppCompatActivity {
 
     private int playerScore = 0;
 
-    private boolean gameOver;
+    private boolean isGameOver;
 
     private ArrayList<ImageView> parts;
     private int screenHeight, screenWidth;
@@ -103,7 +103,7 @@ public class NoWallsSnake extends AppCompatActivity {
         if (playMusic) {
 
             musicPlayer.start();
-            //This did the trick
+
             musicPlayer.setOnErrorListener(new android.media.MediaPlayer.OnErrorListener() {
 
                 public boolean onError(MediaPlayer mediaplayer, int i, int j) {
@@ -339,7 +339,7 @@ public class NoWallsSnake extends AppCompatActivity {
 
     private void gameOver() {
 
-        gameOver = true;
+        isGameOver = true;
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("NoWallsScore", playerScore);
@@ -404,7 +404,7 @@ public class NoWallsSnake extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!gameOver && !isPaused) {
+                while (!isGameOver && !isPaused) {
                     try {
                         Thread.sleep(GameSettings.GAME_THREAD);
                         myHandler.post(new Runnable() {

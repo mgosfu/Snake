@@ -15,7 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class NoWallsScore extends AppCompatActivity {
+public class BombScore extends AppCompatActivity {
 
     private Animation animation;
 
@@ -33,7 +33,7 @@ public class NoWallsScore extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_no_walls_score);
+        setContentView(R.layout.activity_bomb_score);
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -113,9 +113,9 @@ public class NoWallsScore extends AppCompatActivity {
                 playAgainImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intentNoWalls = new Intent(NoWallsScore.this, NoWallsSnake.class);
-                        intentNoWalls.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intentNoWalls);
+                        Intent intentBomb = new Intent(BombScore.this, BombSnake.class);
+                        intentBomb.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intentBomb);
                     }
                 });
 
@@ -160,20 +160,20 @@ public class NoWallsScore extends AppCompatActivity {
                         mainMenuImageView.setImageResource(R.mipmap.menu_options);
 
                         // Reverse animation
-                        Animation animationScore = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.reverse_for_button_top_left);
+                        Animation animationScore = AnimationUtils.loadAnimation(BombScore.this, R.anim.reverse_for_button_top_left);
                         animationScore.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
-                        Animation animationHighScore = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.reverse_for_button_top_right);
+                        Animation animationHighScore = AnimationUtils.loadAnimation(BombScore.this, R.anim.reverse_for_button_top_right);
                         animationHighScore.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
-                        Animation animationPlayAgain = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.reverse_for_button_bottom_left);
+                        Animation animationPlayAgain = AnimationUtils.loadAnimation(BombScore.this, R.anim.reverse_for_button_bottom_left);
                         animationPlayAgain.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
-                        Animation animationMenu = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.reverse_for_button_bottom_right);
+                        Animation animationMenu = AnimationUtils.loadAnimation(BombScore.this, R.anim.reverse_for_button_bottom_right);
                         animationMenu.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
 
-                        Animation animationTitleLeft = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.anim_for_title_left);
+                        Animation animationTitleLeft = AnimationUtils.loadAnimation(BombScore.this, R.anim.anim_for_title_left);
                         animationTitleLeft.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
-                        Animation animationTitleMiddle = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.anim_for_title_middle);
+                        Animation animationTitleMiddle = AnimationUtils.loadAnimation(BombScore.this, R.anim.anim_for_title_middle);
                         animationTitleMiddle.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
-                        Animation animationTitleRight = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.anim_for_title_right);
+                        Animation animationTitleRight = AnimationUtils.loadAnimation(BombScore.this, R.anim.anim_for_title_right);
                         animationTitleRight.setDuration(GameSettings.ANIMATION_SHOW_TITLE_DURATION);
 
                         scoreTextView.startAnimation(animationScore);
@@ -190,7 +190,7 @@ public class NoWallsScore extends AppCompatActivity {
                             @Override
                             public void run() {
 
-                                Intent intentMain = new Intent(NoWallsScore.this, MainMenu.class);
+                                Intent intentMain = new Intent(BombScore.this, MainMenu.class);
                                 intentMain.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                                 startActivity(intentMain);
 
@@ -214,7 +214,7 @@ public class NoWallsScore extends AppCompatActivity {
     private void setScore() {
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
-        int playerScore = preferences.getInt("NoWallsScore", 0);
+        int playerScore = preferences.getInt("BombScore", 0);
         //scoreTextView.setText("Score: " + String.valueOf(playerScore));
         scoreTextView.setText(getString(R.string.current_score, playerScore, 0));
         scoreTextView.setTextColor(Color.WHITE);
@@ -227,12 +227,12 @@ public class NoWallsScore extends AppCompatActivity {
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        int highScore = preferences.getInt("NoWallsHighScore", 0);
-        int lastScore = preferences.getInt("NoWallsScore", 0);
+        int highScore = preferences.getInt("BombHighScore", 0);
+        int lastScore = preferences.getInt("BombScore", 0);
 
         if (lastScore > highScore) {
 
-            editor.putInt("NoWallsHighScore", lastScore);
+            editor.putInt("BombHighScore", lastScore);
             editor.apply();
             highScore = lastScore;
 
@@ -252,7 +252,7 @@ public class NoWallsScore extends AppCompatActivity {
         gameOverTitleMiddleTextView = (TextView) findViewById(R.id.gameover_middle);
         gameOverTitleRightTextView = (TextView) findViewById(R.id.gameover_right);
 
-        Animation animationTitleLeft = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.back_anim_for_title_left);
+        Animation animationTitleLeft = AnimationUtils.loadAnimation(BombScore.this, R.anim.back_anim_for_title_left);
         animationTitleLeft.setDuration(GameSettings.ANIMATION_HIDE_TITLE_DURATION);
         animationTitleLeft.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -272,7 +272,7 @@ public class NoWallsScore extends AppCompatActivity {
         });
         gameOverTitleLeftTextView.startAnimation(animationTitleLeft);
 
-        Animation animationTitleMiddle = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.back_anim_for_title_middle);
+        Animation animationTitleMiddle = AnimationUtils.loadAnimation(BombScore.this, R.anim.back_anim_for_title_middle);
         animationTitleMiddle.setDuration(GameSettings.ANIMATION_HIDE_TITLE_DURATION);
         animationTitleMiddle.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -292,7 +292,7 @@ public class NoWallsScore extends AppCompatActivity {
         });
         gameOverTitleMiddleTextView.startAnimation(animationTitleMiddle);
 
-        Animation animationTitleRight = AnimationUtils.loadAnimation(NoWallsScore.this, R.anim.back_anim_for_title_right);
+        Animation animationTitleRight = AnimationUtils.loadAnimation(BombScore.this, R.anim.back_anim_for_title_right);
         animationTitleRight.setDuration(GameSettings.ANIMATION_HIDE_TITLE_DURATION);
         animationTitleRight.setAnimationListener(new Animation.AnimationListener() {
             @Override
