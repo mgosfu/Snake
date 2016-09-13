@@ -54,8 +54,11 @@ public class BombScore extends AppCompatActivity {
 
         RelativeLayout bombScoreLayout = (RelativeLayout) findViewById(R.id.bomb_score_layout);
         bombScoreLayout.addView(adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest;
+        if (GameSettings.LIVE_APP)
+            adRequest = new AdRequest.Builder().build();
+        else
+            adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
 
         adView.loadAd(adRequest);
 

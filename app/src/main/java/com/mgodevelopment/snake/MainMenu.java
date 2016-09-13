@@ -44,8 +44,12 @@ public class MainMenu extends AppCompatActivity {
         adView.setAdUnitId(GameSettings.MY_AD_UNIT_ID);
 
         snakeLayout.addView(adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
+
+        AdRequest adRequest;
+        if (GameSettings.LIVE_APP)
+            adRequest = new AdRequest.Builder().build();
+        else
+            adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
 
         adView.loadAd(adRequest);
 

@@ -5,6 +5,8 @@ package com.mgodevelopment.snake;
  */
 public final class GameSettings {
 
+    public static final boolean LIVE_APP = false;
+
     public static final int FOOD_POINTS = 5; // points for eating food
     public static final int NUMBER_POINTS = 20; // number of points in bomb mode
     public static final int POINTS_BOMB_ANIMATION = 15; // animation in bomb mode

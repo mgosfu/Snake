@@ -54,8 +54,12 @@ public class NoWallsScore extends AppCompatActivity {
 
         RelativeLayout noWallsScoreLayout = (RelativeLayout) findViewById(R.id.no_walls_score_layout);
         noWallsScoreLayout.addView(adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
-        //AdRequest adRequest = new AdRequest.Builder().build();
+
+        AdRequest adRequest;
+        if (GameSettings.LIVE_APP)
+            adRequest = new AdRequest.Builder().build();
+        else
+            adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
 
         adView.loadAd(adRequest);
 
