@@ -160,42 +160,49 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
 
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-
-                Animation animationHide = AnimationUtils.loadAnimation(Settings.this, R.anim.reverse_for_home_button);
-                animationHide.setDuration(GameSettings.ANIMATION_HIDE_HOME_BUTTON_DURATION);
-                btnSwipe.setImageResource(R.mipmap.menu_options);
-                btnMusic.setImageResource(R.mipmap.menu_options);
-
-                Animation animationSwipe = AnimationUtils.loadAnimation(Settings.this, R.anim.reverse_for_button_top_left);
-                animationSwipe.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
-
-                Animation animationMusic = AnimationUtils.loadAnimation(Settings.this, R.anim.reverse_for_button_top_right);
-                animationMusic.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
-
-                Animation animationTitleLeft = AnimationUtils.loadAnimation(Settings.this, R.anim.anim_for_title_left);
-                animationTitleLeft.setDuration(GameSettings.ANIMATION_SHOW_HOME_BUTTON_DURATION);
-                Animation animationTitleMiddle = AnimationUtils.loadAnimation(Settings.this, R.anim.anim_for_title_middle);
-                animationTitleMiddle.setDuration(GameSettings.ANIMATION_SHOW_HOME_BUTTON_DURATION);
-                Animation animationTitleRight = AnimationUtils.loadAnimation(Settings.this, R.anim.anim_for_title_right);
-                animationTitleRight.setDuration(GameSettings.ANIMATION_SHOW_HOME_BUTTON_DURATION);
-
-                btnHome.startAnimation(animationHide);
-                btnSwipe.startAnimation(animationSwipe);
-                btnMusic.startAnimation(animationMusic);
-                titleLeft.startAnimation(animationTitleLeft);
-                titleMiddle.startAnimation(animationTitleMiddle);
-                titleRight.startAnimation(animationTitleRight);
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
+                btnHome.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void run() {
-                        Intent intentMain = new Intent(Settings.this, MainMenu.class);
-                        intentMain.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intentMain);
+                    public void onClick(View v) {
+
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+                        Animation animationHide = AnimationUtils.loadAnimation(Settings.this, R.anim.reverse_for_home_button);
+                        animationHide.setDuration(GameSettings.ANIMATION_HIDE_HOME_BUTTON_DURATION);
+                        btnSwipe.setImageResource(R.mipmap.menu_options);
+                        btnMusic.setImageResource(R.mipmap.menu_options);
+
+                        Animation animationSwipe = AnimationUtils.loadAnimation(Settings.this, R.anim.reverse_for_button_top_left);
+                        animationSwipe.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
+
+                        Animation animationMusic = AnimationUtils.loadAnimation(Settings.this, R.anim.reverse_for_button_top_right);
+                        animationMusic.setDuration(GameSettings.ANIMATION_CLOSE_BUTTON_DURATION);
+
+                        Animation animationTitleLeft = AnimationUtils.loadAnimation(Settings.this, R.anim.anim_for_title_left);
+                        animationTitleLeft.setDuration(GameSettings.ANIMATION_SHOW_HOME_BUTTON_DURATION);
+                        Animation animationTitleMiddle = AnimationUtils.loadAnimation(Settings.this, R.anim.anim_for_title_middle);
+                        animationTitleMiddle.setDuration(GameSettings.ANIMATION_SHOW_HOME_BUTTON_DURATION);
+                        Animation animationTitleRight = AnimationUtils.loadAnimation(Settings.this, R.anim.anim_for_title_right);
+                        animationTitleRight.setDuration(GameSettings.ANIMATION_SHOW_HOME_BUTTON_DURATION);
+
+                        btnHome.startAnimation(animationHide);
+                        btnSwipe.startAnimation(animationSwipe);
+                        btnMusic.startAnimation(animationMusic);
+                        titleLeft.startAnimation(animationTitleLeft);
+                        titleMiddle.startAnimation(animationTitleMiddle);
+                        titleRight.startAnimation(animationTitleRight);
+
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intentMain = new Intent(Settings.this, MainMenu.class);
+                                intentMain.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                startActivity(intentMain);
+                            }
+                        }, GameSettings.START_NEW_ACTIVITY_DURATION);
+
                     }
-                }, GameSettings.START_NEW_ACTIVITY_DURATION);
+                });
 
             }
 
@@ -210,6 +217,70 @@ public class Settings extends AppCompatActivity {
     }
 
     private void title() {
+
+        titleLeft = (TextView) findViewById(R.id.snake_left);
+        titleMiddle = (TextView) findViewById(R.id.snake_middle);
+        titleRight = (TextView) findViewById(R.id.snake_right);
+
+        compileAnimation = AnimationUtils.loadAnimation(Settings.this, R.anim.back_anim_for_title_left);
+        compileAnimation.setDuration(GameSettings.ANIMATION_HIDE_TITLE_DURATION);
+        compileAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        titleLeft.startAnimation(compileAnimation);
+
+        compileAnimation = AnimationUtils.loadAnimation(Settings.this, R.anim.back_anim_for_title_middle);
+        compileAnimation.setDuration(GameSettings.ANIMATION_HIDE_TITLE_DURATION);
+        compileAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        titleMiddle.startAnimation(compileAnimation);
+
+        compileAnimation = AnimationUtils.loadAnimation(Settings.this, R.anim.back_anim_for_title_right);
+        compileAnimation.setDuration(GameSettings.ANIMATION_HIDE_TITLE_DURATION);
+        compileAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        titleRight.startAnimation(compileAnimation);
 
     }
 

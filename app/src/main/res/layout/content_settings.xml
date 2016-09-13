@@ -12,4 +12,82 @@
     tools:context="com.mgodevelopment.snake.Settings"
     tools:showIn="@layout/activity_settings">
 
+    <TextView
+        android:id="@+id/snake_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/snake_left"
+        android:layout_alignBottom="@+id/snake_left"
+        android:layout_centerHorizontal="true"
+        android:text="@string/title_snake_middle"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/snake_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginTop="72dp"
+        android:layout_toStartOf="@id/snake_middle"
+        android:text="@string/title_snake_left"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/snake_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/snake_middle"
+        android:layout_alignBottom="@id/snake_middle"
+        android:layout_marginStart="18dp"
+        android:layout_toEndOf="@id/snake_middle"
+        android:text="@string/title_snake_right"
+        android:textSize="25sp"/>
+
+    <ImageView
+        android:id="@+id/swipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/empty1"
+        android:layout_alignTop="@+id/music"
+        android:src="@mipmap/menu_options"/>
+
+    <ImageView
+        android:id="@+id/music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/snake_middle"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="46dp"
+        android:src="@mipmap/menu_options"/>
+
+    <ImageView
+        android:id="@+id/empty1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/swipe"
+        android:layout_toStartOf="@+id/empty2"
+        android:contentDescription="@string/title_activity_settings"
+        android:src="@mipmap/menu_options"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/empty2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/music"
+        android:layout_alignTop="@+id/empty1"
+        android:contentDescription="@string/title_activity_bomb_snake"
+        android:src="@mipmap/menu_options"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:src="@mipmap/home_button"/>
+
 </RelativeLayout>
