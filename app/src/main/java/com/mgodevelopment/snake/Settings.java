@@ -28,7 +28,7 @@ public class Settings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.content_settings);
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -60,7 +60,7 @@ public class Settings extends AppCompatActivity {
 
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 final SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
-                isSwipe = preferences.getBoolean(GameSettings.CONTROLS, true);
+                isSwipe = preferences.getBoolean(GameSettings.SELECT_CONTROLS, true);
                 btnSwipe.setImageResource(isSwipe ? R.mipmap.swipe : R.mipmap.buttons);
 //                if (isSwipeOn) {
 //                    btnSwipe.setImageResource(R.mipmap.swipe);
@@ -81,7 +81,7 @@ public class Settings extends AppCompatActivity {
                         }
                         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putBoolean(GameSettings.CONTROLS, isSwipe);
+                        editor.putBoolean(GameSettings.SELECT_CONTROLS, isSwipe);
                         editor.apply();
                     }
                 });

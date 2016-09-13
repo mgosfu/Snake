@@ -72,7 +72,7 @@ public class ClassicSnake extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_classic_snake);
+        setContentView(R.layout.content_classic_snake);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         View decorView = getWindow().getDecorView();
@@ -259,7 +259,7 @@ public class ClassicSnake extends AppCompatActivity {
         });
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
-        isSwipe = preferences.getBoolean(GameSettings.CONTROLS, true);
+        isSwipe = preferences.getBoolean(GameSettings.SELECT_CONTROLS, true);
 
         if (isSwipe) {
 
@@ -328,7 +328,7 @@ public class ClassicSnake extends AppCompatActivity {
         isGameOver = true;
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("Score", playerScore);
+        editor.putInt(GameSettings.HIGH_SCORE, playerScore);
         //editor.commit();
         editor.apply();
         Intent intentScore = new Intent(ClassicSnake.this, ClassicScore.class);

@@ -72,7 +72,7 @@ public class NoWallsSnake extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_no_walls_snake);
+        setContentView(R.layout.content_no_walls_snake);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         View decorView = getWindow().getDecorView();
@@ -258,7 +258,7 @@ public class NoWallsSnake extends AppCompatActivity {
         });
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
-        isSwipe = preferences.getBoolean(GameSettings.CONTROLS, true);
+        isSwipe = preferences.getBoolean(GameSettings.SELECT_CONTROLS, true);
 
         if (isSwipe) {
 
@@ -342,7 +342,7 @@ public class NoWallsSnake extends AppCompatActivity {
         isGameOver = true;
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("NoWallsScore", playerScore);
+        editor.putInt(GameSettings.HIGH_SCORE, playerScore);
         //editor.commit();
         editor.apply();
         Intent intentScore = new Intent(NoWallsSnake.this, NoWallsScore.class);

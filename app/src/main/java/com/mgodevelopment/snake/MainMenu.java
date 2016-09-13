@@ -45,6 +45,7 @@ public class MainMenu extends AppCompatActivity {
 
         snakeLayout.addView(adView);
         AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        //AdRequest adRequest = new AdRequest.Builder().build();
 
         adView.loadAd(adRequest);
 

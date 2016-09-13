@@ -2,15 +2,14 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/no_walls_score_layout"
+    android:id="@+id/bomb_score_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.mgodevelopment.snake.NoWallsScore"
-    tools:showIn="@layout/activity_no_walls_score">
+    tools:context="com.mgodevelopment.snake.BombScore">
 
     <TextView
         android:id="@+id/gameover_middle"

@@ -9,8 +9,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.mgodevelopment.snake.Settings"
-    tools:showIn="@layout/activity_settings">
+    tools:context="com.mgodevelopment.snake.Settings">
 
     <TextView
         android:id="@+id/snake_middle"

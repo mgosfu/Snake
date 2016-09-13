@@ -9,8 +9,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.mgodevelopment.snake.NoWallsSnake"
-    tools:showIn="@layout/activity_no_walls_snake">
+    tools:context="com.mgodevelopment.snake.NoWallsSnake">
 
     <TextView
         android:id="@+id/score"

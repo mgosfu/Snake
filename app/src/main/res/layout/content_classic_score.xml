@@ -9,8 +9,7 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
-    tools:context="com.mgodevelopment.snake.ClassicScore"
-    tools:showIn="@layout/activity_classic_score">
+    tools:context="com.mgodevelopment.snake.ClassicScore">
 
     <TextView
         android:id="@+id/gameover_middle"

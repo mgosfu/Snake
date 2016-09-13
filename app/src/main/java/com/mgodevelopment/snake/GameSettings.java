@@ -11,7 +11,8 @@ public final class GameSettings {
     public static final int POINTS_ANIMATION = 4;
     public static final int NUMBER_BOMBS = 5;
 
-    public static final String MY_AD_UNIT_ID = "TBA";
+    public static final String MY_APP_ID = "ca-app-pub-2673652992229577~7387619646";
+    public static final String MY_AD_UNIT_ID = "ca-app-pub-2673652992229577/1201485248";
 
     // flash animation in ms for the app
     public static final int ANIMATION_OPEN_BUTTON_DURATION = 400;
@@ -33,6 +34,11 @@ public final class GameSettings {
     public static final String PREFS_NAME = "SnakePreferences";
 
     public static final String PLAY_MUSIC = "PlayMusic";
-    public static final String CONTROLS = "SelectControls";
+    public static final String SELECT_CONTROLS = "SelectControls";
+
+    public static final String HIGH_SCORE = "HighScore";
+    public static final String HIGH_SCORE_BOMB = "BombHighScore";
+    public static final String HIGH_SCORE_CLASSIC = "ClassicHighScore";
+    public static final String HIGH_SCORE_NO_WALLS = "NoWallsHighScore";
 
 }

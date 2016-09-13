@@ -13,7 +13,12 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
 public class BombScore extends AppCompatActivity {
 
@@ -29,17 +34,31 @@ public class BombScore extends AppCompatActivity {
     private TextView gameOverTitleMiddleTextView;
     private TextView gameOverTitleRightTextView;
 
+    private AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bomb_score);
+        setContentView(R.layout.content_bomb_score);
 
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
         if (getSupportActionBar() != null)
             getSupportActionBar().hide();
+
+        adView = new AdView(this);
+        adView.setAdSize(AdSize.SMART_BANNER);
+        adView.setAdUnitId(GameSettings.MY_AD_UNIT_ID);
+
+        RelativeLayout bombScoreLayout = (RelativeLayout) findViewById(R.id.bomb_score_layout);
+        bombScoreLayout.addView(adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        //AdRequest adRequest = new AdRequest.Builder().build();
+
+        adView.loadAd(adRequest);
+
         initPage();
 
     }
@@ -214,7 +233,7 @@ public class BombScore extends AppCompatActivity {
     private void setScore() {
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
-        int playerScore = preferences.getInt("BombScore", 0);
+        int playerScore = preferences.getInt(GameSettings.HIGH_SCORE, 0);
         //scoreTextView.setText("Score: " + String.valueOf(playerScore));
         scoreTextView.setText(getString(R.string.current_score, playerScore, 0));
         scoreTextView.setTextColor(Color.WHITE);
@@ -227,12 +246,12 @@ public class BombScore extends AppCompatActivity {
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        int highScore = preferences.getInt("BombHighScore", 0);
-        int lastScore = preferences.getInt("BombScore", 0);
+        int highScore = preferences.getInt(GameSettings.HIGH_SCORE_BOMB, 0);
+        int lastScore = preferences.getInt(GameSettings.HIGH_SCORE, 0);
 
         if (lastScore > highScore) {
 
-            editor.putInt("BombHighScore", lastScore);
+            editor.putInt(GameSettings.HIGH_SCORE_BOMB, lastScore);
             editor.apply();
             highScore = lastScore;
 
