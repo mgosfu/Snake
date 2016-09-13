@@ -323,6 +323,11 @@ public class BombScore extends AppCompatActivity {
         initMainMenu();
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
 }
 
 

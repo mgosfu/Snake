@@ -23,7 +23,7 @@ public final class GameSettings {
     public static final int START_NEW_ACTIVITY_DURATION = 200;
 
     public static final int SHAKE_DURATION = 200;
-    public static final int GAME_THREAD = 80;
+    public static final int GAME_THREAD = 50;
     public static final int GAME_THREAD_BOMB = 60;
     public static final int SWIPE_THRESH_HOLD = 100;
     public static final int SWIPE_VELOCITY_THRESH_HOLD = 100;
@@ -31,5 +31,8 @@ public final class GameSettings {
     public static final int LAYOUT_MARGIN = 0;
 
     public static final String PREFS_NAME = "SnakePreferences";
+
+    public static final String PLAY_MUSIC = "PlayMusic";
+    public static final String CONTROLS = "SelectControls";
 
 }

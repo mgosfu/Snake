@@ -20,7 +20,7 @@ public class Settings extends AppCompatActivity {
     private ImageView btnSwipe, btnMusic, btnHome;
 
     private Animation compileAnimation;
-    private boolean isMusicOn, isSwipeOn;
+    private boolean isMusicOn, isSwipe;
 
     private RelativeLayout settingsLayout;
 
@@ -60,26 +60,28 @@ public class Settings extends AppCompatActivity {
 
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 final SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
-                isSwipeOn = preferences.getBoolean("Controls", true);
-                if (isSwipeOn) {
-                    btnSwipe.setImageResource(R.mipmap.swipe);
-                } else {
-                    btnSwipe.setImageResource(R.mipmap.buttons);
-                }
+                isSwipe = preferences.getBoolean(GameSettings.CONTROLS, true);
+                btnSwipe.setImageResource(isSwipe ? R.mipmap.swipe : R.mipmap.buttons);
+//                if (isSwipeOn) {
+//                    btnSwipe.setImageResource(R.mipmap.swipe);
+//                } else {
+//                    btnSwipe.setImageResource(R.mipmap.buttons);
+//                }
 
                 btnSwipe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (isSwipeOn) {
-                            isSwipeOn = false;
+                        btnSwipe.setImageDrawable(null);
+                        if (isSwipe) {
+                            isSwipe = false;
                             btnSwipe.setImageResource(R.mipmap.buttons);
                         } else {
-                            isSwipeOn = true;
+                            isSwipe = true;
                             btnSwipe.setImageResource(R.mipmap.swipe);
                         }
                         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putBoolean("Controls", isSwipeOn);
+                        editor.putBoolean(GameSettings.CONTROLS, isSwipe);
                         editor.apply();
                     }
                 });
@@ -110,16 +112,18 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
-                isMusicOn = preferences.getBoolean("Music", true);
-                if (isMusicOn) {
-                    btnMusic.setImageResource(R.mipmap.music_on);
-                } else {
-                    btnMusic.setImageResource(R.mipmap.music_off);
-                }
+                isMusicOn = preferences.getBoolean(GameSettings.PLAY_MUSIC, true);
+                btnMusic.setImageResource(isMusicOn ? R.mipmap.music_on : R.mipmap.music_off);
+//                if (isMusicOn) {
+//                    btnMusic.setImageResource(R.mipmap.music_on);
+//                } else {
+//                    btnMusic.setImageResource(R.mipmap.music_off);
+//                }
 
                 btnMusic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        btnMusic.setImageDrawable(null);
                         if (isMusicOn) {
                             isMusicOn = false;
                             btnMusic.setImageResource(R.mipmap.music_off);
@@ -129,7 +133,7 @@ public class Settings extends AppCompatActivity {
                         }
                         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putBoolean("Music", isMusicOn);
+                        editor.putBoolean(GameSettings.PLAY_MUSIC, isMusicOn);
                         editor.apply();
                     }
                 });
@@ -284,6 +288,10 @@ public class Settings extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }
 
 

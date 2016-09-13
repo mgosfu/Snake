@@ -45,7 +45,7 @@ public class ClassicSnake extends AppCompatActivity {
     private boolean clickUp;
     private boolean clickDown;
 
-    private boolean useButtons;
+    private boolean isSwipe;
 
     private ImageView btnRight, btnLeft, btnDown, btnUp;
 
@@ -97,7 +97,7 @@ public class ClassicSnake extends AppCompatActivity {
     private void musicOnOff() {
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
-        playMusic = preferences.getBoolean("PlayMusic", true);
+        playMusic = preferences.getBoolean(GameSettings.PLAY_MUSIC, true);
         musicPlayer = MediaPlayer.create(ClassicSnake.this, R.raw.music);
 
         if (playMusic) {
@@ -259,21 +259,21 @@ public class ClassicSnake extends AppCompatActivity {
         });
 
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GameSettings.PREFS_NAME, Context.MODE_PRIVATE);
-        useButtons = preferences.getBoolean("UseButtonControls", true);
+        isSwipe = preferences.getBoolean(GameSettings.CONTROLS, true);
 
-        if (useButtons) {
-
-            btnRight.setVisibility(View.VISIBLE);
-            btnLeft.setVisibility(View.VISIBLE);
-            btnUp.setVisibility(View.VISIBLE);
-            btnDown.setVisibility(View.VISIBLE);
-
-        } else {
+        if (isSwipe) {
 
             btnRight.setVisibility(View.INVISIBLE);
             btnLeft.setVisibility(View.INVISIBLE);
             btnUp.setVisibility(View.INVISIBLE);
             btnDown.setVisibility(View.INVISIBLE);
+
+        } else {
+
+            btnRight.setVisibility(View.VISIBLE);
+            btnLeft.setVisibility(View.VISIBLE);
+            btnUp.setVisibility(View.VISIBLE);
+            btnDown.setVisibility(View.VISIBLE);
 
         }
 
@@ -562,7 +562,7 @@ public class ClassicSnake extends AppCompatActivity {
 
             boolean result = false;
 
-            if (!useButtons) {
+            if (isSwipe) {
 
                 try {
 

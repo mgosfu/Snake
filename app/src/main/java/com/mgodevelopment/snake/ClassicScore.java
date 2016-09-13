@@ -323,6 +323,11 @@ public class ClassicScore extends AppCompatActivity {
         initMainMenu();
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
 }
 
 

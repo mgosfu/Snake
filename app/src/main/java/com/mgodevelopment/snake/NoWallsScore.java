@@ -323,6 +323,11 @@ public class NoWallsScore extends AppCompatActivity {
         initMainMenu();
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
 }
 
 
